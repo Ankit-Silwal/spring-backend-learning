@@ -1,6 +1,10 @@
 spring:
   application:
     name: spring-backend-learning
-
+  data:
+    mongodb:
+      host:localhost
+      port:27017
+      database:journaldb
 server:
   port: 8000

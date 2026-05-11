@@ -1,36 +1,42 @@
 package org.example.springbackendlearning.controller;
 import org.example.springbackendlearning.entity.JournalEntry;
+import org.example.springbackendlearning.service.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/journal")
 public class JournalEntryController {
-  private Map<Long,JournalEntry> journalEntries=new HashMap<>();
-  @GetMapping
-  public List<JournalEntry> getAll(){
-    return new ArrayList<>(journalEntries.values());
-  }
+
+  @Autowired
+  private JournalEntryService journalEntryService;
 
   @PostMapping
   public boolean createEntry(@RequestBody JournalEntry myEntry){
-    journalEntries.put(myEntry.getId(), myEntry);
+    myEntry.setDate(LocalDateTime.now());
+    journalEntryService.saveEntry(myEntry);
     return true;
   }
-  @GetMapping("id/{myId}")
-  public JournalEntry getJournalEntryById(@PathVariable long myId){
-    return journalEntries.get(myId);
-  }
-  @DeleteMapping("id/{myId}")
-  public JournalEntry deleteJournalEntryById(@PathVariable long myId){
-    return journalEntries.remove(myId);
+  @GetMapping
+  public List<JournalEntry> getAllEntries(){
+    return journalEntryService.getAll();
   }
 
-  public JournalEntry updateJournalById(@PathVariable long id,@RequestBody JournalEntry myEntry){
-    return journalEntries.put(id,myEntry);
+  @GetMapping("/id/{myId}")
+  public JournalEntry getJournalEntryById(@PathVariable String myId){
+    return journalEntryService.getById(myId);
+  }
+
+  @DeleteMapping("/id/{myId}")
+  public JournalEntry deleteJournalEntryById(@PathVariable String myId){
+    return journalEntryService.deleteById(myId);
+  }
+
+  @PutMapping("/id/{myId}")
+  public JournalEntry updateJournalById(@PathVariable String myId,@RequestBody JournalEntry myEntry){
+    return journalEntryService.updateById(myId, myEntry);
   }
 }
