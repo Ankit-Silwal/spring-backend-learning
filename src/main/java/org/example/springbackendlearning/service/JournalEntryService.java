@@ -13,8 +13,8 @@ public class JournalEntryService {
   @Autowired
   private JournalEntryRepository journalEntryRepository;
 
-  public void saveEntry(JournalEntry journalEntry){
-    journalEntryRepository.save(journalEntry);
+  public JournalEntry saveEntry(JournalEntry journalEntry){
+    return journalEntryRepository.save(journalEntry);
   }
 
   public List<JournalEntry> getAll(){
@@ -34,7 +34,11 @@ public class JournalEntryService {
   }
 
   public JournalEntry updateById(String id, JournalEntry journalEntry){
-    journalEntry.setId(new ObjectId(id));
-    return journalEntryRepository.save(journalEntry);
+    ObjectId objectId = new ObjectId(id);
+    if(journalEntryRepository.existsById(objectId)){
+      journalEntry.setId(objectId);
+      return journalEntryRepository.save(journalEntry);
+    }
+    return null;
   }
 }
