@@ -22,13 +22,7 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  public Optional<UserEntity> findById(ObjectId id){
-    return userRepository.findById(id);
-  }
 
-  public void deleteById(ObjectId id){
-    userRepository.deleteById(id);
-  }
 
   public UserEntity findByUserName(String username){
     return userRepository.findByUserName(username);
