@@ -1,4 +1,4 @@
-package org.ankit.spring.entity;
+package org.example.springbackendlearning.entity;
 
 public class JournalEntity {
   private int id;

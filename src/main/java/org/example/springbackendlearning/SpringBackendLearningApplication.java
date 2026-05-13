@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 public class SpringBackendLearningApplication {
-
   public static void main(String[] args) {
     SpringApplication.run(SpringBackendLearningApplication.class, args);
   }

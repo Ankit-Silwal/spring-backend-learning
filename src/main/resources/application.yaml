@@ -1,11 +1,7 @@
 spring:
   application:
     name: spring-backend-learning
-  data:
-    mongodb:
-      host:localhost
-      port:27017
-      database:journaldb
-      auto-index-creation=true
+  datasource:
+    url:postgresql//localhost:5432/journal
 server:
   port: 8000
