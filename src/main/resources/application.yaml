@@ -2,6 +2,8 @@ spring:
   application:
     name: spring-backend-learning
   datasource:
-    url:postgresql//localhost:5432/journal
+    url: jdbc:postgresql://localhost:5432/journal
+    username: postgres
+    password: tahaxaina
 server:
   port: 8000

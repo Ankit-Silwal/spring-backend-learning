@@ -30,4 +30,8 @@ public class JournalService
     return journalRepository.put(id,journalEntity);
   }
 
+  public JournalEntity getJournalById(int id){
+    return journalRepository.get(id);
+  }
+
 }

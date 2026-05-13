@@ -30,4 +30,9 @@ public class JournalController {
     return journalService.putJournal(id,journalEntity);
   }
 
+  @GetMapping("/{id}")
+  public JournalEntity getById(@PathVariable int id){
+    return journalService.getJournalById(id);
+  }
+
 }
