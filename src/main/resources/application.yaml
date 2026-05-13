@@ -7,3 +7,5 @@ spring:
     password: tahaxaina
 server:
   port: 8000
+jwt:
+  secret: blahblahcidontnkowwhatiamdoing

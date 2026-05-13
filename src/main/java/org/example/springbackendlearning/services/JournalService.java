@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class JournalService
@@ -18,7 +19,7 @@ public class JournalService
     journalRepository.saveEntry(myEntity);
   }
 
-  public void deleteJournal(int id){
+  public void deleteJournal(UUID id){
     journalRepository.deleteEntry(id);
   }
 
@@ -26,11 +27,11 @@ public class JournalService
     return  journalRepository.get();
   }
 
-  public JournalEntity putJournal(int id,JournalEntity journalEntity){
+  public JournalEntity putJournal(UUID id, JournalEntity journalEntity){
     return journalRepository.put(id,journalEntity);
   }
 
-  public JournalEntity getJournalById(int id){
+  public JournalEntity getJournalById(UUID id){
     return journalRepository.get(id);
   }
 

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class JournalRepository
@@ -25,7 +26,7 @@ public class JournalRepository
     );
   }
 
-  public void deleteEntry(int id)
+  public void deleteEntry(UUID id)
   {
     String sql = "DELETE FROM journal_entries WHERE id = ?";
 
@@ -42,32 +43,28 @@ public class JournalRepository
     return jdbcTemplate.query(sql, (rs, rowNum) -> mapRow(rs));
   }
 
-  public JournalEntity get(int id)
+  public JournalEntity get(UUID id)
   {
     String sql = "SELECT * FROM journal_entries WHERE id = ?";
-
     return jdbcTemplate.queryForObject(
             sql,
             (rs, rowNum) -> mapRow(rs),
             id
     );
   }
-
-  public JournalEntity put(int id, JournalEntity journalEntity)
+  public JournalEntity put(UUID id, JournalEntity journalEntity)
   {
     String sql = """
         UPDATE journal_entries
         SET title = ?, content = ?
         WHERE id = ?
         """;
-
     jdbcTemplate.update(
             sql,
             journalEntity.getTitle(),
             journalEntity.getDescription(),
             id
     );
-
     return journalEntity;
   }
 
@@ -75,10 +72,9 @@ public class JournalRepository
   {
     JournalEntity journalEntity = new JournalEntity();
 
-    journalEntity.setId(rs.getInt("id"));
+    journalEntity.setId(rs.getObject("id",UUID.class));
     journalEntity.setTitle(rs.getString("title"));
     journalEntity.setDescription(rs.getString("content"));
-
     return journalEntity;
   }
 }

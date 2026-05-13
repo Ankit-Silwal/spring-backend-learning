@@ -2,6 +2,7 @@ package org.example.springbackendlearning.repository;
 
 import org.example.springbackendlearning.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,6 @@ public class UserRepository {
     jdbcTemplate.update(sql,
             user.getEmail(),
             user.getPassword());
-
   }
 
   public UserEntity findByEmail(String email)
@@ -31,9 +31,7 @@ public class UserRepository {
               sql,
               (rs, rowNum) -> {
                 UserEntity user = new UserEntity();
-                user.setId(rs.getInt("id"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
+                new BeanPropertyRowMapper<>(UserEntity.class);
                 return user;
               },
               email

@@ -5,6 +5,7 @@ import org.example.springbackendlearning.services.JournalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/journal")
@@ -21,17 +22,17 @@ public class JournalController {
   }
 
   @DeleteMapping("/{id}")
-  public void delete(@PathVariable int id){
+  public void delete(@PathVariable UUID id){
     journalService.deleteJournal(id);
   }
 
   @PutMapping("/{id}")
-  public JournalEntity put(@PathVariable int id,@RequestBody JournalEntity journalEntity){
+  public JournalEntity put(@PathVariable UUID id,@RequestBody JournalEntity journalEntity){
     return journalService.putJournal(id,journalEntity);
   }
 
   @GetMapping("/{id}")
-  public JournalEntity getById(@PathVariable int id){
+  public JournalEntity getById(@PathVariable UUID id){
     return journalService.getJournalById(id);
   }
 
